@@ -82,6 +82,8 @@ namespace NutEditor
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     Bitmap bitmap = new Bitmap(dialog.FileName);
+
+                    NutFile.Images[ImagePosition].ImageFormat = ImageFormat.Eight_Bits_Per_Pixel;
                     NutFile.Images[ImagePosition].UpdateImage(bitmap);
 
                     ImageDisplay.Source = BitmapToImageSource(NutFile.Images[ImagePosition].ImageBitMap);
@@ -133,6 +135,7 @@ namespace NutEditor
             {
                 ImagePosition = 0;
             }
+
             ImageDisplay.Source = BitmapToImageSource(NutFile.Images[ImagePosition].ImageBitMap);
             ImageDisplay.Width = NutFile.Images[ImagePosition].Width;
             ImageDisplay.Height = NutFile.Images[ImagePosition].Height;
