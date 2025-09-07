@@ -72,6 +72,23 @@ namespace NutFileLibrary
                     }
                 }
             }
+            else if(imageFormat == ImageFormat.I8)
+            {
+                TileHeight = 4;
+                TileWidth = 8;
+
+                Tile = new Color[8, 4];
+
+                // Create color value position.
+                ColorValuePosition = new byte[TileWidth, TileHeight];
+                for (int y = 0; y < TileHeight; y++)
+                {
+                    for (int x = 0; x < TileWidth; x++)
+                    {
+                        position++;
+                    }
+                }
+            }
             else if (imageFormat == ImageFormat.DXT1) {
                 TileHeight = 4;
                 TileWidth = 4;
@@ -136,7 +153,7 @@ namespace NutFileLibrary
 
                 ColorValuePosition = new byte[TileWidth, TileHeight];
             }
-            else 
+            else
             {
                 throw new ArgumentException("Unexpected Image Format");
             }

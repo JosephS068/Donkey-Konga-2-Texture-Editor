@@ -79,7 +79,8 @@ namespace NutFileLibrary
 
             int tileHeight = 0;
             int tileWidth = 0;
-            if (imageFormat == ImageFormat.Eight_Bits_Per_Pixel)
+            if (imageFormat == ImageFormat.Eight_Bits_Per_Pixel
+                || imageFormat == ImageFormat.I8)
             {
                 tileHeight = 4;
                 tileWidth = 8;
@@ -257,12 +258,21 @@ namespace NutFileLibrary
                                 bitMap.SetPixel(x + tileX, y + tileY, pixelColor);
                             }
                         }
+                        else if (imageTile.ImageFormat == ImageFormat.I8)
+                        {
+                            Color pixelColor = imageTile.Tile[tileX, tileY];
+
+                            if (pixelColor.A != 0)
+                            {
+                                bitMap.SetPixel(x + tileX, y + tileY, pixelColor);
+                            }
+                        }
                         else
                         {
                             // Palette boys
                             int colorIndex = imageTile.ColorValuePosition[tileX, tileY];
                             Color pixelColor = ColorPaletteData[colorIndex];
-                            if(pixelColor.A != 0)
+                            if (pixelColor.A != 0)
                             {
                                 bitMap.SetPixel(x + tileX, y + tileY, pixelColor);
                             }
@@ -507,11 +517,15 @@ namespace NutFileLibrary
 
     public enum ImageFormat : byte
     {
+        ARGB8 = 3
+            ,
         // Used with non-palette file types.
         DXT1 = 4,
 
         Four_Bits_Per_Pixel = 5,
 
-        Eight_Bits_Per_Pixel = 6
+        Eight_Bits_Per_Pixel = 6,
+
+        I8 = 0xA
     }
 }
