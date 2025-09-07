@@ -39,7 +39,11 @@ namespace NutEditor
         {
             ImagePosition = 0;
             NutFile = new NutFile();
-            var dialog = new OpenFileDialog();
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Nut files (*.nut)|*.nut",
+                Title = "Open Nut File"
+            };
             DialogResult result = dialog.ShowDialog();
 
             if (result == System.Windows.Forms.DialogResult.OK)
