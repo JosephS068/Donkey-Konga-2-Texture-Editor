@@ -510,3 +510,6 @@
 /NutFile/obj/NutFile.csproj.nuget.dgspec.json
 /NutFile/obj/NutFile.csproj.nuget.g.props
 /NutFile/obj/NutFile.csproj.nuget.g.targets
+/NutEditor/obj/NutEditor.csproj.nuget.g.targets
+/NutFile/obj/Debug/net6.0/NutFileLibrary.GlobalUsings.g.cs
+/NutFile/obj/NutFileLibrary.csproj.nuget.g.targets
