@@ -85,6 +85,8 @@ namespace NutFileLibrary
                 {
                     for (int x = 0; x < TileWidth; x++)
                     {
+                        int grayValue = imageData[position];
+                        Tile[x, y] = Color.FromArgb(255, grayValue, grayValue, grayValue);  
                         position++;
                     }
                 }
