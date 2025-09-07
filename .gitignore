@@ -73,3 +73,5 @@
 /NutFile/obj/project.nuget.cache
 /NutEditor/obj/Debug/net6.0-windows10.0.17763.0/MainWindow.baml
 /NutEditor/obj/Debug/net6.0-windows10.0.17763.0/NutEditor.g.resources
+/NutFile/bin/Debug/net6.0/NutFileLibrary.deps.json
+/NutEditor/bin/Debug/net6.0-windows10.0.17763.0/NutEditor.runtimeconfig.json
