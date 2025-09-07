@@ -1,7 +1,9 @@
 # Donkey-Konga-2-Texture-Editor
 
 This is a simple program to edit .nut or namco texture.
-[Namco Texture Editor]([https://duckduckgo.com](https://github.com/marco-calautti/Rainbow/wiki/NUT-File-Format#))
+[Namco Texture Editor](https://github.com/marco-calautti/Rainbow/wiki/NUT-File-Format#)
+
+<img width="880" height="788" alt="image" src="https://github.com/user-attachments/assets/89f048ab-7dd3-4121-91d3-a6ee837a9ff3" />
 
 Allows you to replace an image in a .nut file with another image of the exact same size.
 
@@ -13,8 +15,6 @@ This project was made specifically for Donkey Konga 2 and tested using that game
 
 This project was possible thanks to rainbow, it was a great resource in figuring out how to import textures and much of the code was lifted from the C# application: 
 [Rainbow](https://github.com/marco-calautti/Rainbow)
-
-This was created before I had much expierence with WPF so the UI is pretty terrible. 
 
 Exceptions should hopefully appear in a pop-up box or at least common ones I've seen while using this tool. If you do begin using this and are running into issues I'd be happy to make updates!
 
