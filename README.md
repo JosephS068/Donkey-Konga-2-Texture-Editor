@@ -1,7 +1,6 @@
-# Donkey-Konga-2-Texture-Editor
+# Donkey Konga 2/3 Texture Editor
 
-This is a simple program to edit .nut or namco texture.
-[Namco Texture Editor](https://github.com/marco-calautti/Rainbow/wiki/NUT-File-Format#)
+This is a simple program to edit .nut or [Namco Texture](https://github.com/marco-calautti/Rainbow/wiki/NUT-File-Format#).
 
 <img width="880" height="788" alt="image" src="https://github.com/user-attachments/assets/89f048ab-7dd3-4121-91d3-a6ee837a9ff3" />
 
