@@ -1,5 +1,4 @@
 ﻿using NutFileLibrary;
-using System;
 using System.Drawing;
 using System.IO;
 using System.Windows;
@@ -14,7 +13,17 @@ namespace NutEditor
     /// </summary>
     public partial class MainWindow : Window
     {
-        int ImagePosition = 0;
+        int _imagePosition = 0;
+        public int ImagePosition
+        {
+            get => _imagePosition;
+            set
+            {
+                _imagePosition = value;
+                ImageIndexInput.Text = value.ToString();
+            }
+        }
+
         NutFile NutFile;
 
         string CurrentNuteFileName = "";
@@ -80,7 +89,7 @@ namespace NutEditor
                     ImageDisplay.Height = NutFile.Images[ImagePosition].Height;
                 }
             }
-            catch (Exception exception)
+            catch (System.Exception exception)
             {
                 System.Windows.MessageBox.Show(exception.Message);
             }
@@ -152,6 +161,46 @@ namespace NutEditor
             {
                 Previous_Click(null, null);
             }
+        }
+
+        private void Image_Index_Change(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter)
+            {
+                return;
+            }
+
+            if (int.TryParse(ImageIndexInput.Text, out int parsedInt))
+            {
+                // Success: result now holds the integer value
+            }
+            else
+            {
+
+                ImageIndexInput.Text = ImagePosition.ToString();
+                System.Windows.MessageBox.Show("Could not convert input to a number");
+                return;
+            }
+
+            // Bounds checking
+            if (parsedInt >= NutFile.Header.NumberOfTextures)
+            {
+                ImageIndexInput.Text = ImagePosition.ToString();
+                System.Windows.MessageBox.Show("Number is too high");
+                return; 
+            }
+            if (parsedInt < 0)
+            {
+                ImageIndexInput.Text = ImagePosition.ToString();
+                System.Windows.MessageBox.Show("Number is too low");
+                return;
+            }
+
+            ImagePosition = parsedInt;
+
+            ImageDisplay.Source = BitmapToImageSource(NutFile.Images[ImagePosition].ImageBitMap);
+            ImageDisplay.Width = NutFile.Images[ImagePosition].Width;
+            ImageDisplay.Height = NutFile.Images[ImagePosition].Height;
         }
     }
 }
