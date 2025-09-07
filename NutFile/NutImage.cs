@@ -226,20 +226,20 @@ namespace NutFileLibrary
             Bitmap bitMap = new Bitmap(Width, Height);
             bitMap.MakeTransparent();
             // Give default background to bitmap.
-            for(int xback=0; xback < Width; xback++)
-            {
-                for (int yback = 0; yback < Height; yback++)
-                {
-                    if(yback % 2 == 0 || yback % 3 == 0)
-                    {
-                        bitMap.SetPixel(xback, yback, Color.White);
-                    }
-                    else
-                    {
-                        bitMap.SetPixel(xback, yback, Color.LightGray);
-                    }
-                }
-            }
+            //for(int xback=0; xback < Width; xback++)
+            //{
+            //    for (int yback = 0; yback < Height; yback++)
+            //    {
+            //        if(yback % 2 == 0 || yback % 3 == 0)
+            //        {
+            //            bitMap.SetPixel(xback, yback, Color.White);
+            //        }
+            //        else
+            //        {
+            //            bitMap.SetPixel(xback, yback, Color.LightGray);
+            //        }
+            //    }
+            //}
 
             int x = 0;
             int y = 0;
