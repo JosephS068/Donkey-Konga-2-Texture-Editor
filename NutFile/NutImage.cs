@@ -297,6 +297,19 @@ namespace NutFileLibrary
                 throw new Exception("Image needs to be the same size as existing one");
             }
 
+            ImageFormat originalFormatOfIamge = ImageFormat;
+            // 4 bits per pixel have different file sizes, need to fix that since it will be eight bits per pixel always
+            if (ImageFormat == ImageFormat.Four_Bits_Per_Pixel
+                || ImageFormat == ImageFormat.DXT1)
+            {
+                // Adding image length again because it is about to double in size
+                TextureDataLength += ImageLength;
+                ImageLength *= 2;
+            }
+
+            // Currently this is the only image format that can be used to replace values
+            ImageFormat = ImageFormat.Eight_Bits_Per_Pixel;
+
             // Get list of colors
             byte[,] positionList = new byte[Width, Height];
             Color[,] colorList = new Color[Width, Height];
@@ -360,8 +373,12 @@ namespace NutFileLibrary
             }
 
             TextureDataLength -= PaletteLength;
+            
             // Times 2 as colors are contained in a ushort.
-            PaletteLength = 256 * 2;//(uint)colorBytes.Count;
+            PaletteLength = 256 * 2;
+
+            TextureDataLength += PaletteLength;
+
             // The game expects this to be filled with 512 bytes
             List<byte> listWith512Bytes = new List<byte>();
             listWith512Bytes.AddRange(colorBytes);
@@ -370,8 +387,6 @@ namespace NutFileLibrary
             listWith512Bytes.AddRange(remainingBytes);
 
             PaletteData = listWith512Bytes.ToArray();
-
-            TextureDataLength += PaletteLength;
 
             NumberOfColors = (ushort)gcColors.Count;
 

@@ -86,16 +86,6 @@ namespace NutEditor
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     Bitmap bitmap = new Bitmap(dialog.FileName);
-
-                    // 4 bits per pixel have different file sizes, need to fix that since it will be eight bits per pixel always
-                    if(NutFile.Images[ImagePosition].ImageFormat == ImageFormat.Four_Bits_Per_Pixel)
-                    {
-                        NutFile.Images[ImagePosition].TextureDataLength += NutFile.Images[ImagePosition].ImageLength;
-                        NutFile.Images[ImagePosition].ImageLength *= 2;
-                    }
-                    NutFile.Images[ImagePosition].ImageFormat = ImageFormat.Eight_Bits_Per_Pixel;
-
-
                     NutFile.Images[ImagePosition].UpdateImage(bitmap);
 
                     ImageDisplay.Source = BitmapToImageSource(NutFile.Images[ImagePosition].ImageBitMap);
