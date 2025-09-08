@@ -63,8 +63,8 @@ namespace NutEditor
                 ImageDisplay.Height = NutFile.Images[0].Height;
 
                 ImagePosition = 0;
-                NuteFileName.Content = "File Name: " + dialog.SafeFileName;
-                NutMaxImages.Content = "Total Images: " + NutFile.Images.Count;
+                NuteFileName.Content = dialog.SafeFileName;
+                NutMaxImages.Content = "Images: " + NutFile.Images.Count;
             }
         }
 
