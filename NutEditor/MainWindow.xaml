@@ -3,39 +3,58 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="NutEditor" Height="800" Width="900">
     <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <!-- Open Save Nut Export -->
-            <RowDefinition Height="Auto"/>
-            <!-- Replace Image -->
-            <RowDefinition Height="Auto"/>
-            <!-- Next/Previous -->
-            <RowDefinition Height="Auto"/>
-            <!-- Image Index -->
-            <RowDefinition Height="*"/>
-            <!-- Image -->
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,10,0,0">
-            <Button Content="Open" Width="96" Height="25" Click="Open_Nut_File" HorizontalAlignment="Left" Margin="0,0,10,0"/>
-            <Button x:Name="Save" Content="Save Nut File" Width="96" Height="25" Click="Save_Click" Margin="0,0,10,0"/>
-            <Button x:Name="Export" Content="Export To PNG" Width="96" Height="25" Click="Export_Click" Margin="0,0,10,0" HorizontalAlignment="Left"/>
-        </StackPanel>
+        <!-- Controls on the left -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,40,0,0">
-            <Button x:Name="Replace" Content="Replace Image" Width="96" Height="25" Click="Replace_Click"/>
-        </StackPanel>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Content="Open" Width="96" Height="25" Click="Open_Nut_File" Margin="0,0,10,0"/>
+                <Button x:Name="Save" Content="Save Nut File" Width="96" Height="25" Click="Save_Click" Margin="0,0,10,0"/>
+            </StackPanel>
 
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="Export" Content="Export To PNG" Width="96" Height="25" Click="Export_Click"/>
+            </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
-            <Button Name="Previous" Content="Previous" Width="96" Height="25" Click="Previous_Click" Margin="0,0,10,0"/>
-            <Button Name="Next" Content="Next" Width="96" Height="25" Click="Next_Click"/>
-        </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,40,0,0">
+                <Button x:Name="Replace" Content="Replace Image" Width="96" Height="25" Click="Replace_Click"/>
+            </StackPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,0">
-            <TextBox Name="ImageIndexInput" Width="200" Height="25" Margin="0,0,0,0" HorizontalAlignment="Left" KeyDown="Image_Index_Change"/>
-        </StackPanel>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Name="Previous" Content="Previous" Width="96" Height="25" Click="Previous_Click" Margin="0,0,10,0"/>
+                <Button Name="Next" Content="Next" Width="96" Height="25" Click="Next_Click"/>
+            </StackPanel>
 
-        <Image Grid.Row="5" Name="ImageDisplay" Stretch="Uniform" Margin="0,10,0,0"/>
+            <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBox Name="ImageIndexInput" Width="200" Height="25" KeyDown="Image_Index_Change"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="5" Orientation="Vertical" Margin="0,10,0,0">
+                <Label Content="Nut Data" FontWeight="Bold" FontSize="14" Foreground="DarkSlateGray" Margin="0,0,10,0"/>
+
+                <Label x:Name="NuteFileName" Content="" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <Label x:Name="NutMaxImages" Content="" VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+                <Label Content="Image Data" FontWeight="Bold" FontSize="14" Foreground="DarkSlateGray" Margin="0,0,10,0"/>
+                <Label x:Name="ImageFormatLabel" Content="" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <Label x:Name="ImageWidthLabel" Content="" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <Label x:Name="ImageHeightLabel" Content="" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Image on the right -->
+        <Image Grid.Column="1" Name="ImageDisplay" Stretch="Uniform" Margin="20,10,0,0"/>
     </Grid>
 </Window>

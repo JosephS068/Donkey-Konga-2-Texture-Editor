@@ -20,7 +20,13 @@ namespace NutEditor
             set
             {
                 _imagePosition = value;
-                ImageIndexInput.Text = value.ToString();
+                if (ImagePosition < NutFile.Images.Count && ImagePosition >= 0)
+                {
+                    ImageIndexInput.Text = value.ToString();
+                    ImageFormatLabel.Content = "Image Format: " + NutFile?.Images[ImagePosition].ImageFormat.ToString();
+                    ImageWidthLabel.Content = "Image Width: " + NutFile?.Images[ImagePosition].Width;
+                    ImageFormatLabel.Content = "Image Height: " + NutFile?.Images[ImagePosition].Height;
+                }
             }
         }
 
@@ -37,7 +43,6 @@ namespace NutEditor
 
         void Open_Nut_File(object sender, RoutedEventArgs e)
         {
-            ImagePosition = 0;
             NutFile = new NutFile();
             var dialog = new OpenFileDialog
             {
@@ -56,6 +61,10 @@ namespace NutEditor
                 ImageDisplay.Source = BitmapToImageSource(NutFile.Images[0].ImageBitMap);
                 ImageDisplay.Width = NutFile.Images[0].Width;
                 ImageDisplay.Height = NutFile.Images[0].Height;
+
+                ImagePosition = 0;
+                NuteFileName.Content = "File Name: " + dialog.SafeFileName;
+                NutMaxImages.Content = "Total Images: " + NutFile.Images.Count;
             }
         }
 
