@@ -5,13 +5,16 @@
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <!-- Controls on the left -->
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -21,30 +24,34 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,10,0,0">
-                <Button Content="📂 Open" Width="96" Height="25" Click="Open_Nut_File" Margin="0,0,10,0"/>
-                <Button x:Name="Save" Content="💾 Save Nut File" Width="96" Height="25" Click="Save_Click" Margin="0,0,10,0"/>
+                <Button Content="📂 Open Directory" Width="110" Height="25" Click="Open_Directory" Margin="0,0,10,0"/>
+                <Button Content="📂 Open Nut File" Width="110" Height="25" Click="Open_Nut_File" Margin="0,0,10,0"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="Save" Content="💾 Save Nut File" Width="96" Height="25" Click="Save_Click" Margin="0,0,10,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
                 <Button x:Name="Export" Content="Export To PNG" Width="96" Height="25" Click="Export_Click"/>
                 <Button x:Name="ExportAll" Content="Export All Images To PNG" Width="140" Height="25" Click="Export_All_Click" Margin="10,0,0,0"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,40,0,0">
+            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,40,0,0">
                 <Button x:Name="Replace" Content="Replace Image" Width="96" Height="25" Click="Replace_Click"/>
                 <Button x:Name="BulkReplace" Content="Bulk Replace Images" Width="130" Height="25" Click="Bulk_Replace_Click" Margin="10,0,0,0"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,0">
+            <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,10,0,0">
                 <Button Name="Previous" Content="Previous" Width="96" Height="25" Click="Previous_Click" Margin="0,0,10,0"/>
                 <Button Name="Next" Content="Next" Width="96" Height="25" Click="Next_Click"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,10,0,0">
+            <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,10,0,0">
                 <TextBox Name="ImageIndexInput" Width="200" Height="25" KeyDown="Image_Index_Change"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="5" Orientation="Vertical" Margin="0,10,0,0">
+            <StackPanel Grid.Row="6" Orientation="Vertical" Margin="0,10,0,0">
                 <Label Content="Nut Data" FontWeight="Bold" FontSize="14" Foreground="DarkSlateGray" Margin="0,0,10,0"/>
 
                 <Label x:Name="NuteFileName" Content="" VerticalAlignment="Center" Margin="0,0,10,0"/>
@@ -55,12 +62,29 @@
                 <Label x:Name="ImageWidthLabel" Content="" VerticalAlignment="Center" Margin="0,0,10,0"/>
                 <Label x:Name="ImageHeightLabel" Content="" VerticalAlignment="Center" Margin="0,0,10,0"/>
             </StackPanel>
+
+            <ScrollViewer Grid.Row="7" VerticalScrollBarVisibility="Auto" MaxHeight="300">
+                <ItemsControl ItemsSource="{Binding NutFileEntries}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Content="{Binding FileName}" Click="NutFileButton_Click" Margin="5" Cursor="Hand"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+
         </Grid>
 
         <!-- Image on the right -->
-        <Image Grid.Column="1" Name="ImageDisplay" Stretch="Uniform" Margin="20,10,0,0"/>
+        <Image Grid.Column="2" Name="ImageDisplay" Stretch="Uniform" Margin="20,10,0,0"/>
 
-        <Grid Grid.Column="2">
+        <Grid Grid.Column="3">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <ItemsControl ItemsSource="{Binding Thumbnails}">
                     <ItemsControl.ItemsPanel>
