@@ -1,5 +1,6 @@
 ﻿using NutFileLibrary;
 using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using System.Windows;
@@ -31,6 +32,9 @@ namespace NutEditor
             }
         }
 
+        // Binded to UI so we can scroll thumbnails
+        public ObservableCollection<BitmapImage> Thumbnails { get; set; } = new ObservableCollection<BitmapImage>();
+
         NutFile NutFile;
 
         string CurrentNuteFileName = "";
@@ -40,6 +44,7 @@ namespace NutEditor
             InitializeComponent();
             KeyDown += new System.Windows.Input.KeyEventHandler(MainWindow_KeyDown);
             NutFile NutFile = new NutFile();
+            DataContext = this;
         }
 
         void Open_Nut_File(object sender, RoutedEventArgs e)
@@ -67,6 +72,12 @@ namespace NutEditor
                 NutFile.FileName = dialog.SafeFileName;
                 NuteFileName.Content = dialog.SafeFileName;
                 NutMaxImages.Content = "Images: " + NutFile.Images.Count;
+
+                Thumbnails.Clear();
+                foreach ( var image in NutFile.Images )
+                {
+                    Thumbnails.Add(BitmapToImageSource(image.ImageBitMap));
+                }
             }
         }
 
@@ -216,6 +227,17 @@ namespace NutEditor
             ImageDisplay.Source = BitmapToImageSource(NutFile.Images[ImagePosition].ImageBitMap);
             ImageDisplay.Width = NutFile.Images[ImagePosition].Width;
             ImageDisplay.Height = NutFile.Images[ImagePosition].Height;
+        }
+
+        private void Thumbnail_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is System.Windows.Controls.Button button && button.DataContext is BitmapImage clickedImage)
+            {
+                ImagePosition = Thumbnails.IndexOf(clickedImage);
+                ImageDisplay.Source = BitmapToImageSource(NutFile.Images[ImagePosition].ImageBitMap);
+                ImageDisplay.Width = NutFile.Images[ImagePosition].Width;
+                ImageDisplay.Height = NutFile.Images[ImagePosition].Height;
+            }
         }
 
         void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
