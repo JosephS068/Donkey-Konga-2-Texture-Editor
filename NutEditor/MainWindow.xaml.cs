@@ -63,6 +63,7 @@ namespace NutEditor
                 ImageDisplay.Height = NutFile.Images[0].Height;
 
                 ImagePosition = 0;
+                NutFile.FileName = dialog.SafeFileName;
                 NuteFileName.Content = dialog.SafeFileName;
                 NutMaxImages.Content = "Images: " + NutFile.Images.Count;
             }
@@ -122,6 +123,29 @@ namespace NutEditor
                 {
                     byte[] nutFileBytes = NutFile.ConvertToBytes();
                     fs.Write(nutFileBytes, 0, nutFileBytes.Length);
+                }
+            }
+        }
+
+        private void Export_All_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
+            folderDialog.Description = "Exported images will be saved in their own folder.";
+            folderDialog.ShowNewFolderButton = true;
+
+            if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string selectedPath = folderDialog.SelectedPath;
+                // You can now create a new folder inside selectedPath
+                string newFolderPath = Path.Combine(selectedPath, NutFile.FileName + " Export");
+                Directory.CreateDirectory(newFolderPath);
+                int index = 0;
+                foreach(NutImage image in NutFile.Images)
+                {
+                    string fileName = $"{NutFile.FileName}_{index}.png";
+                    string fullPath = Path.Combine(newFolderPath, fileName);
+                    image.ImageBitMap.Save(fullPath);
+                    index++;
                 }
             }
         }

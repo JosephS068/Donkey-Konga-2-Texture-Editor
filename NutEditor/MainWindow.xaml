@@ -26,6 +26,7 @@
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
                 <Button x:Name="Export" Content="Export To PNG" Width="96" Height="25" Click="Export_Click"/>
+                <Button x:Name="ExportAll" Content="Export All Images To PNG" Width="140" Height="25" Click="Export_All_Click" Margin="10,0,0,0"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,40,0,0">

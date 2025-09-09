@@ -5,6 +5,9 @@
         public NutHeader Header = new NutHeader();
         public List<NutImage> Images;
 
+        // Not part of the original binaries
+        public string FileName;
+
         public NutFile() { }
 
         public void ReadNutFileBytes(byte[] nutBytes)
