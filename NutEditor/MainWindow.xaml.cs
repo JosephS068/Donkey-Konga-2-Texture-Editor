@@ -1,4 +1,5 @@
 ﻿using NutFileLibrary;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows;
@@ -25,7 +26,7 @@ namespace NutEditor
                     ImageIndexInput.Text = value.ToString();
                     ImageFormatLabel.Content = "Image Format: " + NutFile?.Images[ImagePosition].ImageFormat.ToString();
                     ImageWidthLabel.Content = "Image Width: " + NutFile?.Images[ImagePosition].Width;
-                    ImageFormatLabel.Content = "Image Height: " + NutFile?.Images[ImagePosition].Height;
+                    ImageHeightLabel.Content = "Image Height: " + NutFile?.Images[ImagePosition].Height;
                 }
             }
         }
@@ -107,7 +108,36 @@ namespace NutEditor
             {
                 System.Windows.MessageBox.Show(exception.Message);
             }
-            
+        }
+
+        private void Bulk_Replace_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Multiselect = true;
+                DialogResult result = dialog.ShowDialog();
+
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    string[] selectedFiles = dialog.FileNames;
+                    foreach (string file in selectedFiles)
+                    {
+                        Bitmap bitmap = new Bitmap(file);
+                        NutFile.Images[ImagePosition].UpdateImage(bitmap);
+
+                        ImageDisplay.Source = BitmapToImageSource(NutFile.Images[ImagePosition].ImageBitMap);
+                        ImageDisplay.Width = NutFile.Images[ImagePosition].Width;
+                        ImageDisplay.Height = NutFile.Images[ImagePosition].Height;
+                        // Go to next image, will handle if we are above the number of images
+                        Next_Click(null, null);
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                System.Windows.MessageBox.Show(exception.Message);
+            }
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
