@@ -174,11 +174,26 @@ public partial class MainWindow : Window
                 ImageDisplay.Source = BitmapToImageSource(NutFile.Images[ImagePosition].ImageBitMap);
                 ImageDisplay.Width = NutFile.Images[ImagePosition].Width;
                 ImageDisplay.Height = NutFile.Images[ImagePosition].Height;
+
+                // a horribly janky way to refresh the UI lol, god I hope no one looks at this
+                // I promise I know how to set up WPF apps properly, but I didn't when I first made it and there is no way I'm refactoring 
+                ImagePosition = ImagePosition;
+                RefreshThumbnails();
             }
         }
         catch (Exception exception)
         {
             System.Windows.MessageBox.Show(exception.Message);
+        }
+    }
+
+    private void RefreshThumbnails()
+    {
+        // please pretend you don't see this, I am so sorry.
+        Thumbnails.Clear();
+        foreach (var image in NutFile.Images)
+        {
+            Thumbnails.Add(BitmapToImageSource(image.ImageBitMap));
         }
     }
 
@@ -203,6 +218,8 @@ public partial class MainWindow : Window
                     ImageDisplay.Height = NutFile.Images[ImagePosition].Height;
                     // Go to next image, will handle if we are above the number of images
                     Next_Click(null, null);
+
+                    RefreshThumbnails();
                 }
             }
         }
