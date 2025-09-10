@@ -349,6 +349,12 @@ namespace NutFileLibrary
                 ImageLength *= 2;
             }
 
+            if(ImageFormat == ImageFormat.ARGB8)
+            {
+                ImageLength /= 4;
+                TextureDataLength -= 3 * ImageLength;
+            }
+
             // Currently this is the only image format that can be used to replace values
             ImageFormat = ImageFormat.Eight_Bits_Per_Pixel;
 
