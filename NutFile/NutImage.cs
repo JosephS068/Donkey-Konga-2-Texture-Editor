@@ -64,10 +64,11 @@ namespace NutFileLibrary
                     ColorPaletteData = Create_RGB5_A3_ColorPaletteData();
                     break;
                 case PaletteFormat.IA8:
+                case PaletteFormat.IA8_0xB:
                     ColorPaletteData = Create_IA_8_ColorPaletteData();
                     break;
                 default:
-                    throw new Exception("Unexpected Palette Foramt Found");
+                    throw new Exception("Unexpected Palette Format Found");
             }
 
             ImageBitMap = CreateImageBitMap();
@@ -576,6 +577,10 @@ namespace NutFileLibrary
         // uint8 alpha = AAAAAAAA
         // uint8 red = green = blue = IIIIIIII
         IA8 = 3, 
+
+        // Apparently the same as IA8
+        IA8_0xB = 0xB, 
+        
     }
 
     public enum ImageFormat : byte
@@ -589,6 +594,6 @@ namespace NutFileLibrary
 
         Eight_Bits_Per_Pixel = 6,
 
-        I8 = 0xA
+        I8 = 0xA,
     }
 }
