@@ -2,7 +2,8 @@
 
 This is a simple program to edit .nut or [Namco Texture](https://github.com/marco-calautti/Rainbow/wiki/NUT-File-Format#).
 
-<img width="880" height="788" alt="image" src="https://github.com/user-attachments/assets/89f048ab-7dd3-4121-91d3-a6ee837a9ff3" />
+<img width="1177" height="788" alt="image" src="https://github.com/user-attachments/assets/025ca8de-ac16-49fa-bc06-7d7b15b53228" />
+
 
 Allows you to replace an image in a .nut file with another image of the exact same size.
 
