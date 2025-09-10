@@ -90,7 +90,48 @@ namespace NutFileLibrary
                 tileHeight = 8;
                 tileWidth = 8;
             }
-            else if(imageFormat == ImageFormat.DXT1)
+            else if(imageFormat == ImageFormat.ARGB8)
+            {
+                tileHeight = 4;
+                tileWidth = 4;
+
+                int planeSize = 32;
+                int totalPlanes = 2;
+                int tileSize = planeSize * totalPlanes;
+
+                byte[] ar = new byte[planeSize];
+                byte[] gb = new byte[planeSize];
+
+                int originalPos = pos;
+                int remainingData = imageBytes.Length - pos;
+                byte[] decoded = new byte[remainingData];
+
+                for (int filterPos = 0; filterPos < remainingData; filterPos += tileSize)
+                {
+                    ar = FileTraversal.GetBytesData(imageBytes, ar.Length, ref pos);
+                    gb = FileTraversal.GetBytesData(imageBytes, gb.Length, ref pos);
+
+                    for (int i = 0; i < planeSize; i += 2)
+                    {
+                        byte a = ar[i];
+                        byte r = ar[i + 1];
+
+                        byte g = gb[i];
+                        byte b = gb[i + 1];
+
+                        decoded[filterPos + i * 2] = a;
+                        decoded[filterPos + i * 2 + 1] = r;
+                        decoded[filterPos + i * 2 + 2] = g;
+                        decoded[filterPos + i * 2 + 3] = b;
+                    }
+                }
+
+                pos = originalPos;
+
+                Array.Copy(decoded, 0, imageBytes, originalPos, remainingData);
+
+            }
+            else if (imageFormat == ImageFormat.DXT1)
             {
                 tileHeight = 2;
                 tileWidth = 4;
@@ -250,7 +291,8 @@ namespace NutFileLibrary
                 {
                     for (int tileX = 0; tileX < imageTile.ColorValuePosition.GetLength(0); tileX++)
                     {
-                        if(imageTile.ImageFormat == ImageFormat.DXT1)
+                        if(imageTile.ImageFormat == ImageFormat.DXT1
+                            || imageTile.ImageFormat == ImageFormat.ARGB8)
                         {
                             Color pixelColor = imageTile.Tile[tileX, tileY];
                             if (pixelColor.A != 0)

@@ -72,7 +72,30 @@ namespace NutFileLibrary
                     }
                 }
             }
-            else if(imageFormat == ImageFormat.I8)
+            else if (imageFormat == ImageFormat.ARGB8)
+            {
+                TileHeight = 4;
+                TileWidth = 4;
+
+                Tile = new Color[4, 4];
+
+                // Create color value position.
+                ColorValuePosition = new byte[TileWidth, TileHeight];
+                for (int y = 0; y < TileHeight; y++)
+                {
+                    for (int x = 0; x < TileWidth; x++)
+                    {
+                        int a = imageData[position]; 
+                        int r = imageData[position + 1]; 
+                        int g = imageData[position + 2]; 
+                        int b = imageData[position + 3]; 
+                        
+                        Tile[x, y] = Color.FromArgb(a, r, g, b);
+                        position += 4;
+                    }
+                }
+            }
+            else if (imageFormat == ImageFormat.I8)
             {
                 TileHeight = 4;
                 TileWidth = 8;
@@ -86,7 +109,7 @@ namespace NutFileLibrary
                     for (int x = 0; x < TileWidth; x++)
                     {
                         int grayValue = imageData[position];
-                        Tile[x, y] = Color.FromArgb(255, grayValue, grayValue, grayValue);  
+                        Tile[x, y] = Color.FromArgb(255, grayValue, grayValue, grayValue);
                         position++;
                     }
                 }
@@ -148,7 +171,7 @@ namespace NutFileLibrary
                         // increasing our boy k as we go
                         // we then bit shit it down by 6
                         // then take the 6
-                        Tile[x,y] = colorsToUse[(val >> 6) & BitMask_2Bits];
+                        Tile[x, y] = colorsToUse[(val >> 6) & BitMask_2Bits];
                         val <<= 2;
                     }
                 }
