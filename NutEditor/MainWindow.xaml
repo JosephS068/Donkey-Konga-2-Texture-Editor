@@ -24,31 +24,31 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,10,0,0">
-                <Button Content="📂 Open Directory" Width="110" Height="25" Click="Open_Directory" Margin="0,0,10,0"/>
-                <Button Content="📂 Open Nut File" Width="110" Height="25" Click="Open_Nut_File" Margin="0,0,10,0"/>
+                <Button Content="📂 Open Directory" Width="110" Height="25" Click="Open_Directory" ToolTip="Will go through all sub directories to find nut files" Margin="0,0,10,0"/>
+                <Button Content="📂 Open Nut File" Width="110" Height="25" Click="Open_Nut_File" ToolTip="Open a single .nut file" Margin="0,0,10,0"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
-                <Button x:Name="Save" Content="💾 Save Nut File" Width="96" Height="25" Click="Save_Click" Margin="0,0,10,0"/>
+                <Button x:Name="Save" Content="💾 Save Nut File" Width="96" Height="25" Click="Save_Click" ToolTip="Saves the current nut file as a new one"  Margin="0,0,10,0"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
-                <Button x:Name="Export" Content="Export To PNG" Width="96" Height="25" Click="Export_Click"/>
-                <Button x:Name="ExportAll" Content="Export All Images To PNG" Width="140" Height="25" Click="Export_All_Click" Margin="10,0,0,0"/>
+                <Button x:Name="Export" Content="Export To PNG" Width="96" Height="25" ToolTip="Exports the current image as .PNG" Click="Export_Click"/>
+                <Button x:Name="ExportAll" Content="Export All Images To PNG" Width="140" Height="25" ToolTip="Exports all images in the nut file to PNG in its own folder" Click="Export_All_Click" Margin="10,0,0,0"/>
             </StackPanel>
 
             <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,40,0,0">
-                <Button x:Name="Replace" Content="Replace Image" Width="96" Height="25" Click="Replace_Click"/>
-                <Button x:Name="BulkReplace" Content="Bulk Replace Images" Width="130" Height="25" Click="Bulk_Replace_Click" Margin="10,0,0,0"/>
+                <Button x:Name="Replace" Content="Replace Image" Width="96" Height="25" ToolTip="Replaces the currently selected image, must be the same dimensions" Click="Replace_Click"/>
+                <Button x:Name="BulkReplace" Content="Bulk Replace Images" Width="130" Height="25" ToolTip="Replaces the current and next images based on the number of images selected" Click="Bulk_Replace_Click" Margin="10,0,0,0"/>
             </StackPanel>
 
             <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,10,0,0">
-                <Button Name="Previous" Content="Previous" Width="96" Height="25" Click="Previous_Click" Margin="0,0,10,0"/>
-                <Button Name="Next" Content="Next" Width="96" Height="25" Click="Next_Click"/>
+                <Button Name="Previous" Content="Previous" Width="96" Height="25" Click="Previous_Click" ToolTip="Previous Image"  Margin="0,0,10,0"/>
+                <Button Name="Next" Content="Next" Width="96" Height="25" ToolTip="Next Image" Click="Next_Click"/>
             </StackPanel>
 
             <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,10,0,0">
-                <TextBox Name="ImageIndexInput" Width="200" Height="25" KeyDown="Image_Index_Change"/>
+                <TextBox Name="ImageIndexInput" Width="200" Height="25" KeyDown="Image_Index_Change" ToolTip="The image index in the file, type the index and hit enter to go to that image"/>
             </StackPanel>
 
             <StackPanel Grid.Row="6" Orientation="Vertical" Margin="0,10,0,0">
