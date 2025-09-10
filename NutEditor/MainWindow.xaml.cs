@@ -68,10 +68,9 @@ public partial class MainWindow : Window
         if (result == System.Windows.Forms.DialogResult.OK)
         {
             NutFileEntries.Clear();
-            string selectedFile = folderDialog.SelectedPath;
-            string rootFolder = Path.GetDirectoryName(selectedFile);
+            string selectedFolder = folderDialog.SelectedPath;
 
-            List<string> nutFiles = FindNutFiles(rootFolder);
+            List<string> nutFiles = FindNutFiles(selectedFolder);
             foreach (var file in nutFiles)
             {
                 NutFileEntries.Add(new NutFileEntry
