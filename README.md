@@ -20,7 +20,7 @@ Please feel free to create new issues if you run into problems!
 
 ## Used In the Donkey Konga Bongo Troopers Demo
 This tool was used to create the Demo For Donkey Konga Bongo Troopers: [Link](https://www.romhacking.net/forum/index.php?topic=37588.0).
-Donkey Konga Bongo Trooper features an example custom song, stages, chart and textures.
+Donkey Konga Bongo Trooper features an example custom song, chart, stages and textures.
 
 Bongo Troopers Screenshots:
 
