@@ -356,8 +356,7 @@ namespace NutFileLibrary
                 ImageLength *= 2;
             }
 
-            if (ImageFormat == ImageFormat.Four_Bits_Per_Pixel
-                || ImageFormat == ImageFormat.DXT1)
+            if (ImageFormat == ImageFormat.IA8)
             {
                 ImageLength /= 2;
                 TextureDataLength -= ImageLength;
