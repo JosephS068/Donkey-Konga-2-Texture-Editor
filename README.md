@@ -24,9 +24,27 @@ Donkey Konga Bongo Trooper features an example custom song, stages, chart and te
 
 Bongo Troopers Screenshots:
 
+<table>
+  <tr>
+    <td>
+      <img width="362" height="269" alt="Screenshot 2023-08-27 at 4 22 26 PM"
+           src="https://github.com/user-attachments/assets/b3385392-e6b8-4830-aae8-e7ffb2b7b928" />
+    </td>
+    <td>
+      <img width="362" height="269" alt="Screenshot 2023-08-27 at 4 17 43 PM"
+           src="https://github.com/user-attachments/assets/c1be38b4-a658-40b9-a907-8c591866ce33" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img width="362" height="269" alt="Screenshot 2023-08-27 at 4 18 05 PM"
+           src="https://github.com/user-attachments/assets/c0135e89-0cf0-40c7-9e66-32d1516147c9" />
+    </td>
+    <td>
+      <img width="362" height="269" alt="Screenshot 2023-08-27 at 4 19 04 PM"
+           src="https://github.com/user-attachments/assets/46a5e376-171d-4efe-b611-0c17b3a293da" />
+    </td>
+  </tr>
+</table>
 
-<img width="483" height="359" alt="Screenshot 2023-08-27 at 4 22 26 PM" src="https://github.com/user-attachments/assets/b3385392-e6b8-4830-aae8-e7ffb2b7b928" />
-<img width="483" height="359" alt="Screenshot 2023-08-27 at 4 17 43 PM" src="https://github.com/user-attachments/assets/c1be38b4-a658-40b9-a907-8c591866ce33" />
-<img width="483" height="359" alt="Screenshot 2023-08-27 at 4 18 05 PM" src="https://github.com/user-attachments/assets/c0135e89-0cf0-40c7-9e66-32d1516147c9" />
-<img width="483" height="359" alt="Screenshot 2023-08-27 at 4 19 04 PM" src="https://github.com/user-attachments/assets/46a5e376-171d-4efe-b611-0c17b3a293da" />
 
