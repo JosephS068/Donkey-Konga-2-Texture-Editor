@@ -114,6 +114,26 @@ namespace NutFileLibrary
                     }
                 }
             }
+            else if (imageFormat == ImageFormat.IA8)
+            {
+                TileHeight = 4;
+                TileWidth = 4;
+
+                Tile = new Color[4, 4];
+
+                // Create color value position.
+                ColorValuePosition = new byte[TileWidth, TileHeight];
+                for (int y = 0; y < TileHeight; y++)
+                {
+                    for (int x = 0; x < TileWidth; x++)
+                    {
+                        int alpha = imageData[position];
+                        int grayValue = imageData[position+1];
+                        Tile[x, y] = Color.FromArgb(alpha, grayValue, grayValue, grayValue);
+                        position +=2;
+                    }
+                }
+            }
             else if (imageFormat == ImageFormat.DXT1) {
                 TileHeight = 4;
                 TileWidth = 4;

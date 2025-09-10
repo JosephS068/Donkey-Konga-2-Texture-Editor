@@ -86,12 +86,17 @@ namespace NutFileLibrary
                 tileHeight = 4;
                 tileWidth = 8;
             }
+            else if (imageFormat == ImageFormat.IA8)
+            {
+                tileHeight = 4;
+                tileWidth = 4;
+            }
             else if (imageFormat == ImageFormat.Four_Bits_Per_Pixel)
             {
                 tileHeight = 8;
                 tileWidth = 8;
             }
-            else if(imageFormat == ImageFormat.ARGB8)
+            else if (imageFormat == ImageFormat.ARGB8)
             {
                 tileHeight = 4;
                 tileWidth = 4;
@@ -293,7 +298,8 @@ namespace NutFileLibrary
                     for (int tileX = 0; tileX < imageTile.ColorValuePosition.GetLength(0); tileX++)
                     {
                         if(imageTile.ImageFormat == ImageFormat.DXT1
-                            || imageTile.ImageFormat == ImageFormat.ARGB8)
+                            || imageTile.ImageFormat == ImageFormat.ARGB8
+                            || imageTile.ImageFormat == ImageFormat.IA8)
                         {
                             Color pixelColor = imageTile.Tile[tileX, tileY];
                             if (pixelColor.A != 0)
@@ -350,7 +356,14 @@ namespace NutFileLibrary
                 ImageLength *= 2;
             }
 
-            if(ImageFormat == ImageFormat.ARGB8)
+            if (ImageFormat == ImageFormat.Four_Bits_Per_Pixel
+                || ImageFormat == ImageFormat.DXT1)
+            {
+                ImageLength /= 2;
+                TextureDataLength -= ImageLength;
+            }
+
+            if (ImageFormat == ImageFormat.ARGB8)
             {
                 ImageLength /= 4;
                 TextureDataLength -= 3 * ImageLength;
@@ -595,5 +608,7 @@ namespace NutFileLibrary
         Eight_Bits_Per_Pixel = 6,
 
         I8 = 0xA,
+
+        IA8 = 0xB,
     }
 }
