@@ -495,7 +495,7 @@ namespace NutFileLibrary
             for (int i = 0; i < gcColors.Count; i++)
             {
                 ushort gcColor = gcColors[i];
-                if (color16Bit < gcColor + 35 && gcColor - 35 < color16Bit)
+                if (color16Bit < gcColor + 1 && gcColor - 1 < color16Bit)
                 {
                     return ((byte)i, true);
                 }
