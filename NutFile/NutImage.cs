@@ -110,6 +110,13 @@ namespace NutFileLibrary
 
                 int originalPos = pos;
                 int remainingData = imageBytes.Length - pos;
+                
+                var newImageBytes = new byte[imageBytes.Length];
+
+                // setting it to a new reference
+                Array.Copy(imageBytes, newImageBytes, imageBytes.Length);
+                imageBytes = newImageBytes;
+
                 byte[] decoded = new byte[remainingData];
 
                 for (int filterPos = 0; filterPos < remainingData; filterPos += tileSize)
@@ -400,7 +407,7 @@ namespace NutFileLibrary
                 }
             }
 
-            byte[] imageBytes = Filter4Bytes(positionList, 0, Width, Height, 4);
+            byte[] imageBytes = Filter4Bytes(positionList, 0, Width, Height);
             int bytesPerPixel = 4;
 
             List<byte> recodedImageData = new List<byte>();
@@ -437,6 +444,11 @@ namespace NutFileLibrary
 
             // Now reconvert to verify it converted properly and display
             ImageTiles = CreateImageTiles(ImageData, ImageFormat);
+            ImageBitMap = CreateImageBitMap();
+
+            int unused = 0;
+            ReadFileBytes(GetBytes(), ref unused);
+
             ImageBitMap = CreateImageBitMap();
         }
 
@@ -634,10 +646,11 @@ namespace NutFileLibrary
             return Buf;
         }
 
-        public byte[] Filter4Bytes(Color[,] originalData, int index, int width, int height, int tileWidth = 8)
+        public byte[] Filter4Bytes(Color[,] originalData, int index, int width, int height)
         {
             byte[] Buf = new byte[originalData.Length * 4];
             int tileHeight = 4;
+            int tileWidth = 4;
 
             int bytePos = 0;
 
