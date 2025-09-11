@@ -340,12 +340,108 @@ namespace NutFileLibrary
 
         public void UpdateImage(Bitmap newImage)
         {
-            if(newImage.Width != Width
-                || newImage.Height != Height)
+            if (newImage.Width != Width || newImage.Height != Height)
             {
                 throw new Exception("Image needs to be the same size as existing one");
             }
 
+            int colorCount = GetColorCount(newImage);
+
+            if (colorCount > 256)
+            {
+                CreateARGB8Image(newImage);
+            }
+            else
+            {
+                CreateEightBitPerPixelImage(newImage);
+            }
+        }
+
+        public int GetColorCount(Bitmap newImage)
+        {
+            List<(int, int, int, int)> colors = new();
+            for (int y = 0; y < newImage.Height; y++)
+            {
+                for (int x = 0; x < newImage.Width; x++)
+                {
+                    Color pixelColor = newImage.GetPixel(x, y);
+
+                    var colorTuple = (pixelColor.A, pixelColor.R, pixelColor.G, pixelColor.B);
+
+                    if (colors.Contains(colorTuple) == false)
+                    {
+                        colors.Add(colorTuple);
+                    }
+                }
+            }
+
+            return colors.Count;
+        }
+
+        public void CreateARGB8Image(Bitmap newImage)
+        {
+            // First Delete all byte counts for palette data and image length
+            TextureDataLength -= PaletteLength;
+            TextureDataLength -= ImageLength;
+
+            NumberOfColors = 0;
+            PaletteLength = 0;
+
+            ImageFormat = ImageFormat.ARGB8;
+            PaletteFormat = PaletteFormat.No_Palette;
+
+            // Tile Traversal First
+            Color[,] positionList = new Color[Width, Height];
+            for (int y = 0; y < newImage.Height; y++)
+            {
+                for (int x = 0; x < newImage.Width; x++)
+                {
+                    positionList[x, y] = newImage.GetPixel(x, y);
+                }
+            }
+
+            byte[] imageBytes = Filter4Bytes(positionList, 0, Width, Height, 4);
+            int bytesPerPixel = 4;
+
+            List<byte> recodedImageData = new List<byte>();
+            // Split ARGB values
+            for (int pos = 0; pos < imageBytes.Length;)
+            {
+                // pos is moved by reading in the bytes
+                byte[] originalBytes = FileTraversal.GetBytesData(imageBytes, bytesPerPixel * 16, ref pos);
+
+                List<byte> ar = new();
+                List<byte> gb = new();
+
+                for(int i=0; i<originalBytes.Length; i +=4)
+                {
+                    byte a = originalBytes[i];
+                    byte r = originalBytes[i+1];
+                    ar.AddRange(new byte[] { a, r });
+
+                    byte g = originalBytes[i+2];
+                    byte b = originalBytes[i+3];
+                    gb.AddRange(new byte[] { g, b });
+                }
+
+                recodedImageData.AddRange(ar);
+                recodedImageData.AddRange(gb);
+
+            }
+
+
+            // Set Remaining values
+            ImageLength = (uint)recodedImageData.Count;
+            TextureDataLength += ImageLength;
+            ImageData = recodedImageData.ToArray();
+
+            // Now reconvert to verify it converted properly and display
+            ImageTiles = CreateImageTiles(ImageData, ImageFormat);
+            ImageBitMap = CreateImageBitMap();
+        }
+
+        public void CreateEightBitPerPixelImage(Bitmap newImage)
+        {
             ImageFormat originalFormatOfIamge = ImageFormat;
             // 4 bits per pixel have different file sizes, need to fix that since it will be eight bits per pixel always
             if (ImageFormat == ImageFormat.Four_Bits_Per_Pixel
@@ -506,22 +602,20 @@ namespace NutFileLibrary
             return ((byte)(gcColors.Count - 1), false);
         }
 
-        public byte[] Filter(byte[,] originalData, int index, int width, int height)
+        public byte[] Filter(byte[,] originalData, int index, int width, int height, int tileWidth = 8)
         {
             byte[] Buf = new byte[originalData.Length];
             int tileHeight = 4;
-
-            int lineSize = 8;
 
             int i = 0;
 
             for (int y = 0; y < height; y += tileHeight)
             {
-                for (int x = 0; x < width; x += lineSize)
+                for (int x = 0; x < width; x += tileWidth)
                 {
                     for (int tileY = y; tileY < y + tileHeight; tileY++)
                     {
-                        for (int tileX = x; tileX < x + lineSize; tileX++)
+                        for (int tileX = x; tileX < x + tileWidth; tileX++)
                         {
                             byte data = originalData[tileX, tileY];
 
@@ -532,6 +626,41 @@ namespace NutFileLibrary
 
                             Buf[i] = data;
                             i++;
+                        }
+                    }
+                }
+            }
+
+            return Buf;
+        }
+
+        public byte[] Filter4Bytes(Color[,] originalData, int index, int width, int height, int tileWidth = 8)
+        {
+            byte[] Buf = new byte[originalData.Length * 4];
+            int tileHeight = 4;
+
+            int bytePos = 0;
+
+            for (int y = 0; y < height; y += tileHeight)
+            {
+                for (int x = 0; x < width; x += tileWidth)
+                {
+                    for (int tileY = y; tileY < y + tileHeight; tileY++)
+                    {
+                        for (int tileX = x; tileX < x + tileWidth; tileX++)
+                        {
+                            Color data = originalData[tileX, tileY];
+
+                            if (tileX >= width || tileY >= height)
+                            {
+                                continue;
+                            }
+
+                            Buf[bytePos] = data.A;
+                            Buf[bytePos + 1] = data.R;
+                            Buf[bytePos + 2] = data.G;
+                            Buf[bytePos + 3] = data.B;
+                            bytePos += 4;
                         }
                     }
                 }
