@@ -14,8 +14,12 @@ This project was possible thanks to rainbow, it was a great resource in figuring
 
 Please feel free to create new issues if you run into problems!
 
+## Donkey Konga Mod Community
+If you are looking for further modding discussion you can check out the [Konga Beat Forum](https://forum.kongabeat.com/).
+
 ## Used In the Donkey Konga Bongo Troopers Demo
-This tool was used to create the Demo For Donkey Konga Bongo Troopers: [Link](https://www.romhacking.net/forum/index.php?topic=37588.0).
+This tool was used to create the Demo For Donkey Konga Bongo Troopers: [Link](https://forum.kongabeat.com/threads/donkey-konga-bongo-troopers-demo.22/)
+
 Donkey Konga Bongo Trooper features an example custom song, chart, stages and textures.
 
 Bongo Troopers Screenshots:
