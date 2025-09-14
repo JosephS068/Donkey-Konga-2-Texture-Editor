@@ -353,15 +353,15 @@ namespace NutFileLibrary
             }
 
             int colorCount = GetColorCount(newImage);
-
-            if (colorCount > 256)
-            {
-                CreateARGB8Image(newImage);
-            }
-            else
-            {
-                CreateEightBitPerPixelImage(newImage);
-            }
+            CreateARGB8Image(newImage);
+            //if (colorCount > 256)
+            //{
+                
+            //}
+            //else
+            //{
+            //    CreateEightBitPerPixelImage(newImage);
+            //}
         }
 
         public int GetColorCount(Bitmap newImage)
