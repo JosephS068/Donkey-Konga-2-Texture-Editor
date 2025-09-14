@@ -81,8 +81,43 @@
 
         </Grid>
 
-        <!-- Image on the right -->
-        <Image Grid.Column="2" Name="ImageDisplay" Stretch="Uniform" Margin="20,10,0,0"/>
+        <Grid Grid.Column="2">
+            <!-- Centering container -->
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!-- Auto-sizing border around image -->
+                <Border>
+                    <Grid>
+                        <!-- Checkerboard background -->
+                        <Grid.Background>
+                            <DrawingBrush TileMode="Tile" Viewport="0,0,10,10" ViewportUnits="Absolute">
+                                <DrawingBrush.Drawing>
+                                    <DrawingGroup>
+                                        <GeometryDrawing Brush="LightGray">
+                                            <GeometryDrawing.Geometry>
+                                                <RectangleGeometry Rect="0,0,10,10"/>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                        <GeometryDrawing Brush="White">
+                                            <GeometryDrawing.Geometry>
+                                                <GeometryGroup>
+                                                    <RectangleGeometry Rect="0,0,5,5"/>
+                                                    <RectangleGeometry Rect="5,5,5,5"/>
+                                                </GeometryGroup>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingGroup>
+                                </DrawingBrush.Drawing>
+                            </DrawingBrush>
+                        </Grid.Background>
+
+                        <!-- Image with natural size -->
+                        <Image Name="ImageDisplay" Stretch="None"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+
+
 
         <Grid Grid.Column="3">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
