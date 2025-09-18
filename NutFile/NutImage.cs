@@ -347,12 +347,7 @@ namespace NutFileLibrary
 
         public void UpdateImage(Bitmap newImage)
         {
-            if (newImage.Width != Width || newImage.Height != Height)
-            {
-                throw new Exception("Image needs to be the same size as existing one");
-            }
-
-            int colorCount = GetColorCount(newImage);
+            //int colorCount = GetColorCount(newImage);
             CreateARGB8Image(newImage);
             //if (colorCount > 256)
             //{
@@ -396,6 +391,10 @@ namespace NutFileLibrary
 
             ImageFormat = ImageFormat.ARGB8;
             PaletteFormat = PaletteFormat.No_Palette;
+
+            // Overwrite Width and Height
+            Width = (ushort)newImage.Width;
+            Height = (ushort)newImage.Height;
 
             // Tile Traversal First
             Color[,] positionList = new Color[Width, Height];
