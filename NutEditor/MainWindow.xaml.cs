@@ -170,9 +170,7 @@ public partial class MainWindow : Window
                 Bitmap bitmap = new Bitmap(dialog.FileName);
                 NutFile.Images[ImagePosition].UpdateImage(bitmap);
 
-                ImageDisplay.Source = BitmapToImageSource(NutFile.Images[ImagePosition].ImageBitMap);
-                ImageDisplay.Width = NutFile.Images[ImagePosition].Width;
-                ImageDisplay.Height = NutFile.Images[ImagePosition].Height;
+                SetSelectImage(ImagePosition);
 
                 // a horribly janky way to refresh the UI lol, god I hope no one looks at this
                 // I promise I know how to set up WPF apps properly, but I didn't when I first made it and there is no way I'm refactoring 
@@ -212,9 +210,41 @@ public partial class MainWindow : Window
                     Bitmap bitmap = new Bitmap(file);
                     NutFile.Images[ImagePosition].UpdateImage(bitmap);
 
-                    ImageDisplay.Source = BitmapToImageSource(NutFile.Images[ImagePosition].ImageBitMap);
-                    ImageDisplay.Width = NutFile.Images[ImagePosition].Width;
-                    ImageDisplay.Height = NutFile.Images[ImagePosition].Height;
+                    SetSelectImage(ImagePosition);
+                    // Go to next image, will handle if we are above the number of images
+                    Next_Click(null, null);
+
+                    RefreshThumbnails();
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            System.Windows.MessageBox.Show(exception.Message);
+        }
+    }
+
+    private void Replace_All_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
+            folderDialog.Description = "Select Directory Containing all images to replace in nut file.";
+            folderDialog.ShowNewFolderButton = false;
+
+            DialogResult result = folderDialog.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                SetSelectImage(0);
+                string selectedPath = folderDialog.SelectedPath;
+                string[] pngFiles = Directory.GetFiles(selectedPath, "*.png", SearchOption.TopDirectoryOnly);
+
+                foreach (string file in pngFiles)
+                {
+                    Bitmap bitmap = new Bitmap(file);
+                    NutFile.Images[ImagePosition].UpdateImage(bitmap);
+
+                    SetSelectImage(ImagePosition);
                     // Go to next image, will handle if we are above the number of images
                     Next_Click(null, null);
 
@@ -288,10 +318,7 @@ public partial class MainWindow : Window
         {
             ImagePosition = 0;
         }
-
-        ImageDisplay.Source = BitmapToImageSource(NutFile.Images[ImagePosition].ImageBitMap);
-        ImageDisplay.Width = NutFile.Images[ImagePosition].Width;
-        ImageDisplay.Height = NutFile.Images[ImagePosition].Height;
+        SetSelectImage(ImagePosition);
     }
 
     private void Previous_Click(object sender, RoutedEventArgs e)
@@ -301,9 +328,7 @@ public partial class MainWindow : Window
         {
             ImagePosition = NutFile.Header.NumberOfTextures - 1;
         }
-        ImageDisplay.Source = BitmapToImageSource(NutFile.Images[ImagePosition].ImageBitMap);
-        ImageDisplay.Width = NutFile.Images[ImagePosition].Width;
-        ImageDisplay.Height = NutFile.Images[ImagePosition].Height;
+        SetSelectImage(ImagePosition);
     }
 
     private void Thumbnail_Click(object sender, RoutedEventArgs e)
@@ -311,9 +336,7 @@ public partial class MainWindow : Window
         if (sender is System.Windows.Controls.Button button && button.DataContext is BitmapImage clickedImage)
         {
             ImagePosition = Thumbnails.IndexOf(clickedImage);
-            ImageDisplay.Source = BitmapToImageSource(NutFile.Images[ImagePosition].ImageBitMap);
-            ImageDisplay.Width = NutFile.Images[ImagePosition].Width;
-            ImageDisplay.Height = NutFile.Images[ImagePosition].Height;
+            SetSelectImage(ImagePosition);
         }
     }
 
@@ -364,7 +387,12 @@ public partial class MainWindow : Window
         }
 
         ImagePosition = parsedInt;
+        SetSelectImage(ImagePosition);
+    }
 
+    private void SetSelectImage(int index)
+    {
+        ImagePosition = index;
         ImageDisplay.Source = BitmapToImageSource(NutFile.Images[ImagePosition].ImageBitMap);
         ImageDisplay.Width = NutFile.Images[ImagePosition].Width;
         ImageDisplay.Height = NutFile.Images[ImagePosition].Height;
