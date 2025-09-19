@@ -21,6 +21,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,10,0,0">
@@ -43,15 +44,19 @@
             </StackPanel>
 
             <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="ReplaceAll" Content="Replace All Images" Width="110" Height="25" ToolTip="Select a directory that contains .png files, this will begin replacing all images in nut file with images found in the directory." Click="Replace_All_Click" Margin="0,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,40,0,0">
                 <Button Name="Previous" Content="Previous" Width="96" Height="25" Click="Previous_Click" ToolTip="Previous Image"  Margin="0,0,10,0"/>
                 <Button Name="Next" Content="Next" Width="96" Height="25" ToolTip="Next Image" Click="Next_Click"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,10,0,0">
+            <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="0,10,0,0">
                 <TextBox Name="ImageIndexInput" Width="200" Height="25" KeyDown="Image_Index_Change" ToolTip="The image index in the file, type the index and hit enter to go to that image"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="6" Orientation="Vertical" Margin="0,10,0,0">
+            <StackPanel Grid.Row="7" Orientation="Vertical" Margin="0,10,0,0">
                 <Label Content="Nut Data" FontWeight="Bold" FontSize="14" Foreground="DarkSlateGray" Margin="0,0,10,0"/>
 
                 <Label x:Name="NuteFileName" Content="" VerticalAlignment="Center" Margin="0,0,10,0"/>
@@ -63,7 +68,7 @@
                 <Label x:Name="ImageHeightLabel" Content="" VerticalAlignment="Center" Margin="0,0,10,0"/>
             </StackPanel>
 
-            <ScrollViewer Grid.Row="7" VerticalScrollBarVisibility="Auto" MaxHeight="300">
+            <ScrollViewer Grid.Row="8" VerticalScrollBarVisibility="Auto" MaxHeight="300">
                 <ItemsControl ItemsSource="{Binding NutFileEntries}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
