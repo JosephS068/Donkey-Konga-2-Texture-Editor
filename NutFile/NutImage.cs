@@ -347,6 +347,21 @@ namespace NutFileLibrary
 
         public void UpdateImage(Bitmap newImage)
         {
+            string errorMessage = "";
+            if (newImage.Width % 4 != 0)
+            {
+                errorMessage += $"Invalid Width: {newImage.Width}\n";
+            }
+            if (newImage.Height % 4 != 0)
+            {
+                errorMessage += $"Invalid Height: {newImage.Height}\n";
+            }
+
+            if(errorMessage != "")
+            {
+                throw new Exception("Invalid Image Dimensions, Texture dimensions must be divisible by 4.\n" + errorMessage);
+            }
+
             //int colorCount = GetColorCount(newImage);
             CreateARGB8Image(newImage);
             //if (colorCount > 256)
