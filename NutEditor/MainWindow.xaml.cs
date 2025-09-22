@@ -75,7 +75,7 @@ public partial class MainWindow : Window
             {
                 NutFileEntries.Add(new NutFileEntry
                 {
-                    FileName = Path.GetFileName(file),
+                    FileName = file.Replace(selectedFolder, "").Substring(1),
                     FullPath = file
                 });
             }
