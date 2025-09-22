@@ -290,7 +290,7 @@ public partial class MainWindow : Window
             int index = 0;
             foreach(NutImage image in NutFile.Images)
             {
-                string fileName = $"{NutFile.FileName}_{index}.png";
+                string fileName = $"{NutFile.FileName}_{index.ToString("D3")}.png";
                 string fullPath = Path.Combine(newFolderPath, fileName);
                 image.ImageBitMap.Save(fullPath);
                 index++;
