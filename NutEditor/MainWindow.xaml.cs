@@ -285,12 +285,13 @@ public partial class MainWindow : Window
         {
             string selectedPath = folderDialog.SelectedPath;
             // You can now create a new folder inside selectedPath
-            string newFolderPath = Path.Combine(selectedPath, NutFile.FileName + " Export");
+            string nutFileName = Path.GetFileNameWithoutExtension(NutFile.FileName);
+            string newFolderPath = Path.Combine(selectedPath, nutFileName + " Export");
             Directory.CreateDirectory(newFolderPath);
             int index = 0;
-            foreach(NutImage image in NutFile.Images)
+            foreach (NutImage image in NutFile.Images)
             {
-                string fileName = $"{NutFile.FileName}_{index.ToString("D3")}.png";
+                string fileName = $"{nutFileName}_{index.ToString("D3")}.png";
                 string fullPath = Path.Combine(newFolderPath, fileName);
                 image.ImageBitMap.Save(fullPath);
                 index++;
