@@ -5,11 +5,11 @@ This program allows you to edit .nut files([Namco Texture](https://github.com/ma
 <img width="1177" height="788" alt="image" src="https://github.com/user-attachments/assets/025ca8de-ac16-49fa-bc06-7d7b15b53228" />
 
 
-Allows you to replace images in a .nut file so long as the new image is the exact same dimensions.
+Allows you to replace images in a .nut file so long as the new image.
 
 This project was made specifically for Donkey Konga 2, but Donkey Konga 3 has been tested and all texture files from both games can be viewed in this application. If other games use this file format they should also work.
 
-This project was possible thanks to rainbow, it was a great resource in figuring out how to import textures and much of the code was lifted from the C# application: 
+This project was possible thanks to rainbow, it was a great resource in figuring out how to import textures and code for reading images was lifted from the C# application: 
 [Rainbow](https://github.com/marco-calautti/Rainbow)
 
 Please feel free to create new issues if you run into problems!
